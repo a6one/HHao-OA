@@ -2,7 +2,6 @@ package com.yj.oa.framework.shiro;
 
 import com.yj.oa.common.utils.ServletUtils;
 import com.yj.oa.common.utils.StringUtils;
-import com.yj.oa.project.po.User;
 import com.yj.oa.project.service.user.IUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,17 +38,16 @@ public class LoginService{
     {
         HttpServletRequest request = ServletUtils.getRequest();
         HttpSession session = request.getSession();
+        //将验证码保存到session域对象中
         String code = (String) session.getAttribute(RANDOMCODEKEY);
         String inputCode = validateCode.toUpperCase();
 
         //1.验证码校验
-        if (StringUtils.isEmpty(inputCode))
-        {
+        if (StringUtils.isEmpty(inputCode)) {
             throw new Exception("验证码为空！");
         }
 
-        if (!inputCode.equals(code.toUpperCase()))
-        {
+        if (!inputCode.equals(code.toUpperCase())) {
             throw new Exception("验证码错误！");
         }
 

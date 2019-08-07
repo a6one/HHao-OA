@@ -2,27 +2,23 @@ package com.yj.oa.framework.shiro;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.web.filter.authc.LogoutFilter;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 
 import javax.servlet.Filter;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -84,8 +80,11 @@ public class ShiroConfig{
         Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
         MyLogoutFilter myLogoutFilter = new MyLogoutFilter();
         myLogoutFilter.setLoginUrl(loginUrl);
+
+        //【注意】注册自定义过滤器，使用自定义的key进行现在，是否认证了
         filters.put("sessionExpireFilter",new MySessionExpiredFilter());
         filters.put("logout", myLogoutFilter);
+
         shiroFilterFactoryBean.setFilters(filters);
 
         //设置访问路劲需要和不需要的 请求 url
@@ -100,8 +99,7 @@ public class ShiroConfig{
      * 设置加密方式以及加密次数
      */
     @Bean("hashedCredentialsMatcher")
-    public HashedCredentialsMatcher hashedCredentialsMatcher()
-    {
+    public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
         //加密次数
         hashedCredentialsMatcher.setHashIterations(1024);
@@ -137,6 +135,8 @@ public class ShiroConfig{
         //defaultWebSessionManager.setSessionValidationInterval(1000);
 
         //设置session超时时间。一旦超时将其删除
+
+        //30 * 60 * 1000 = 1800000  半小时
         defaultWebSessionManager.setGlobalSessionTimeout(1800000);
         defaultWebSessionManager.setDeleteInvalidSessions(true);
 

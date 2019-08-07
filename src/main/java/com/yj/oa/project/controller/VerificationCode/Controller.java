@@ -4,6 +4,7 @@ import com.yj.oa.project.po.VerificationCode.ValidateCodeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author 永健
  */
-@org.springframework.stereotype.Controller
+@RestController
 @RequestMapping("/code")
 public class Controller{
     private Logger log = LoggerFactory.getLogger(this.getClass());

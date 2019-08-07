@@ -112,8 +112,7 @@ public class LeaveFormController extends BaseController{
     @RequestMapping("/editSave")
     @Operlog(modal = "请假管理", descr = "修改请假表单")
     @ResponseBody
-    public AjaxResult editSave(LeaveForm leaveForm)
-    {
+    public AjaxResult editSave(LeaveForm leaveForm) {
         //判断当前流程审批是否完成 完成：不允许修改
         HistoricProcessInstance result = historyService.createHistoricProcessInstanceQuery().processInstanceId(
                 leaveForm.getProcInstanId()).singleResult();

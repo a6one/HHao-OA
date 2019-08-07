@@ -1,9 +1,7 @@
 package com.yj.oa.framework.web.controller.defaulView;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -14,6 +12,7 @@ public class DefaultView extends WebMvcConfigurerAdapter {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/OA").setViewName("redirect:/oa/toLogin");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        // 这里其实没有比较，框架其实会传入registry框架
         super.addViewControllers(registry);
     }
 

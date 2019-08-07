@@ -11,22 +11,34 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class ValidateCodeUtil{
-    /**放到session中的key*/
-    public static final String RANDOMCODEKEY= "RANDOMVALIDATECODEKEY";
+public class ValidateCodeUtil {
+    /**
+     * 放到session中的key
+     */
+    public static final String RANDOMCODEKEY = "RANDOMVALIDATECODEKEY";
     /**随机产生只有数字的字符串 private String*/
     //private String randString = "0123456789";
     /**随机产生只有字母的字符串*/
     //private String randString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    /**随机产生数字与字母组合的字符串*/
+    /**
+     * 随机产生数字与字母组合的字符串
+     */
     private String randString = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    /** 图片宽*/
+    /**
+     * 图片宽
+     */
     private int width = 115;
-    /** 图片高*/
+    /**
+     * 图片高
+     */
     private int height = 35;
-    /**干扰线数量*/
+    /**
+     * 干扰线数量
+     */
     private int lineSize = 40;
-    /**随机产生字符数量*/
+    /**
+     * 随机产生字符数量
+     */
     private int stringNum = 4;
 
     private static final Logger logger = LoggerFactory.getLogger(
@@ -80,8 +92,10 @@ public class ValidateCodeUtil{
             randomString = drowString(g, randomString, i);
         }
         //将生成的随机字符串保存到session中
+        //这里是request是不一样的导致，可以使用同一个key
         session.removeAttribute(RANDOMCODEKEY);
         session.setAttribute(RANDOMCODEKEY, randomString);
+        session.setMaxInactiveInterval(30 * 60); //以秒为单位
         g.dispose();
         try {
             // 将内存中的图片通过流动形式输出到客户端

@@ -76,6 +76,7 @@ public class UserRealm extends AuthorizingRealm{
 
 
         //加盐 计算盐值 保证每个加密后的 MD5 不一样
+        //这里是 db user password salt shiro默认是框架密码比对 数据库的密码
         ByteSource credentialsSalt = ByteSource.Util.bytes(user.getUid());
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPwd(), credentialsSalt,
                                                                      this.getName());

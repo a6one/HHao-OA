@@ -19,8 +19,7 @@ public class ActUtil{
      * @return：
      * @date： 2018/9/24 14:29
      */
-    public static Map<String, Object> setStartVariable(String uId,String AgentId)
-    {
+    public static Map<String, Object> setStartVariable(String uId,String AgentId) {
         Map<String, Object> map = new HashMap<>(2);
         //任务节点代理人
         map.put(CsEnum.activiti.AGENT.getValue(), uId);

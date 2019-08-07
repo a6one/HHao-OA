@@ -84,14 +84,12 @@ public class FtpUtil{
                     result = ftp.storeFile(fileName, input);
 
                     //上传成功
-                    if (result)
-                    {
+                    if (result) {
                         i++;
                         uploadS.add(fileName);
                     }
                 }
-                catch (IOException e)
-                {
+                catch (IOException e) {
                     ftp.disconnect();
                     ftp.logout();
                     input.close();
@@ -115,31 +113,24 @@ public class FtpUtil{
      *
      * @date 2018/9/19 23:56
      */
-    public static ResponseEntity<byte[]> fileDown(String fileId, String fileName) throws IOException
-    {
+   public static ResponseEntity<byte[]> fileDown(String fileId, String fileName) throws IOException {
         FTPClient ftp = new FTPClient();
         boolean b = false;
-        if (getConnect(ftp))
-        {
-
+        if (getConnect(ftp)) {
             //拿到服务器的所有文件
             FTPFile[] fs = ftp.listFiles();
-            for (FTPFile ff : fs)
-            {
+            for (FTPFile ff : fs) {
                 //比较名字相同的就下载
-                if (ff.getName().equals(fileId))
-                {
+                if (ff.getName().equals(fileId)) {
                     log.info("$$$$$ 开始下载", DateUtils.DateToSTr(new Date()));
                     InputStream in = null;
                     ByteArrayOutputStream outputStream = null;
-                    try
-                    {
+                    try {
                         in = ftp.retrieveFileStream(ff.getName());
                         int len = 0;
                         byte[] buffer = new byte[1024];
                         outputStream = new ByteArrayOutputStream();
-                        while ((len = in.read(buffer)) > 0)
-                        {
+                        while ((len = in.read(buffer)) > 0) {
                             outputStream.write(buffer, 0, len);
                         }
 
@@ -172,18 +163,14 @@ public class FtpUtil{
     /**
      * 检查是否有图片名称
      */
-    public static boolean isHashFile(String filename) throws IOException
-    {
+    public static boolean isHashFile(String filename) throws IOException {
         FTPClient ftp = new FTPClient();
         boolean b = false;
-        if (getConnect(ftp))
-        {
+        if (getConnect(ftp)) {
             //拿到服务器的所有文件
             FTPFile[] fs = ftp.listFiles();
-            for (FTPFile ff : fs)
-            {
-                if (ff.getName().equals(filename))
-                {
+            for (FTPFile ff : fs) {
+                if (ff.getName().equals(filename)) {
                     return true;
                 }
             }
@@ -244,8 +231,7 @@ public class FtpUtil{
         //登出
         ftp.logout();
         //断开连接
-        if (ftp.isConnected())
-        {
+        if (ftp.isConnected()) {
             ftp.disconnect();
         }
     }
@@ -269,8 +255,7 @@ public class FtpUtil{
             // 登录
             ftp.login(username, password);
             reply = ftp.getReplyCode();
-            if (!FTPReply.isPositiveCompletion(reply))
-            {
+            if (!FTPReply.isPositiveCompletion(reply)) {
                 ftp.disconnect();
                 log.error("连接失败");
                 return false;

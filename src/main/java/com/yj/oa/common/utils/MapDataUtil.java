@@ -39,8 +39,7 @@ public class MapDataUtil
                 }
                 value = value.substring(0, value.length() - 1);
             }
-            else
-            {
+            else {
                 value = valueObj.toString();
             }
             returnMap.put(name, value);

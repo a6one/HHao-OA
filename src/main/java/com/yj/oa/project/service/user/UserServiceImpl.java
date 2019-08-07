@@ -35,8 +35,7 @@ public class UserServiceImpl implements IUserService{
      * @date: 2018/9/29 22:02
      */
     @Override
-    public User login(String uid)
-    {
+    public User login(String uid) {
         return userMapper.login(uid);
     }
 
@@ -46,17 +45,13 @@ public class UserServiceImpl implements IUserService{
      * @date 2018/9/15 21:21
      */
     @Override
-    public int insertSelective(User record)
-    {
-        //uid 为 当前日期+ 按顺序加一
+    public int insertSelective(User record) {
+        //uid 为 当前日期+ 按顺序加一,这里可能存在并发
         Long l = userMapper.selectUserMaxId();
         String uid = record.getUid();
-        if (l == null)
-        {
+        if (l == null) {
             uid = uid + "0";
-        }
-        else
-        {
+        } else {
             uid=String.valueOf((l+1));
         }
         record.setUid(uid);
@@ -69,8 +64,7 @@ public class UserServiceImpl implements IUserService{
      * @date 2018/9/15 10:07
      */
     @Override
-    public User selectByPrimaryKey(String uId)
-    {
+    public User selectByPrimaryKey(String uId) {
         User user = userMapper.selectByPrimaryKey(uId);
         return user;
     }

@@ -1,11 +1,9 @@
 package com.yj.oa.framework.web.controller;
 
-import com.alibaba.druid.support.json.JSONUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.yj.oa.common.constant.Constants;
 import com.yj.oa.common.utils.DateUtils;
-import com.yj.oa.common.utils.HttpHeaderUtil;
 import com.yj.oa.common.utils.ServletUtils;
 import com.yj.oa.common.utils.StringUtils;
 import com.yj.oa.common.utils.shiro.ShiroUtils;
@@ -16,22 +14,9 @@ import com.yj.oa.framework.web.po.AjaxResult;
 import com.yj.oa.project.po.User;
 import com.yj.oa.project.po.dto.MenuTree;
 import com.yj.oa.project.service.menu.IPermissionService;
-import org.apache.shiro.authz.AuthorizationException;
-import org.apache.shiro.authz.UnauthorizedException;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.InitBinder;
 
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * web层通用数据处理
@@ -42,8 +27,7 @@ public class BaseController{
     /**
      * 设置请求分页数据
      */
-    protected void startPage()
-    {
+    protected void startPage() {
         PageDomain pageDomain = TableSupport.buildPageRequest();
         Integer pageNum = pageDomain.getPageNum();
         Integer pageSize = pageDomain.getPageSize();

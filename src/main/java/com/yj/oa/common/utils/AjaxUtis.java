@@ -4,7 +4,6 @@ import com.alibaba.druid.support.json.JSONUtils;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.Map;
 
@@ -31,7 +30,7 @@ public class AjaxUtis{
             //设置返回类型
             response.setContentType("application/json");
             out = response.getWriter();
-            //输出
+            //输出（核心这里用响应流.append | writer进行输出）
             response.getWriter().write(JSONUtils.toJSONString(resultMap));
         } catch (Exception e) {
             System.out.println(e);

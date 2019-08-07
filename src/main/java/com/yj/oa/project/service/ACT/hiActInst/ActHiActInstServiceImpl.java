@@ -27,8 +27,7 @@ public class ActHiActInstServiceImpl implements IActHiActInstService{
      * @date: 2018/9/23 20:49
     */
     @Override
-    public int deleteByProcInstId(String[] procInstIds)
-    {
+    public int deleteByProcInstId(String[] procInstIds) {
         return actHiActinstMapper.deleteByProcInstId(procInstIds);
     }
 

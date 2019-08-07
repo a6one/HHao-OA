@@ -5,8 +5,7 @@ package com.yj.oa.common.utils;
  * 字符串格式化
  * 
  */
-public class StrFormatter
-{
+public class StrFormatter {
 
     public static final String EMPTY_JSON = "{}";
     public static final char C_BACKSLASH = '\\';

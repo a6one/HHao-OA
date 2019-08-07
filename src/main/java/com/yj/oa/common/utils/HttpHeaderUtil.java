@@ -110,8 +110,7 @@ public class HttpHeaderUtil{
     {
         URL url = null;
         HttpURLConnection connection = null;
-        try
-        {
+        try {
             url = new URL(IP_URL);
             connection = (HttpURLConnection) url.openConnection();
             connection.setConnectTimeout(3000);
@@ -121,29 +120,29 @@ public class HttpHeaderUtil{
             connection.setRequestMethod("POST");
             connection.setUseCaches(false);
             connection.connect();
+            //输出内容的数据流
             DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+            //设置输出内容
             out.writeBytes(content);
             out.flush();
             out.close();
+            //返回响应；获取到输入流，然后进行读，转换为buffer
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), encoding));
+            //字符缓存流,一会读一行数据，然后追加到buffer中
             StringBuffer buffer = new StringBuffer();
             String line = "";
-            while ((line = reader.readLine()) != null)
-            {
+            while ((line = reader.readLine()) != null) {
                 buffer.append(line);
             }
             reader.close();
             return buffer.toString();
         }
-        catch (IOException e)
-        {
+        catch (IOException e) {
             System.out.println("温馨提醒：您的主机已经断网，请您检查主机的网络连接");
             System.out.println("根据IP获取所在位置----------错误消息：" + e.getMessage());
         }
-        finally
-        {
-            if (connection != null)
-            {
+        finally {
+            if (connection != null) {
                 connection.disconnect();
             }
         }
@@ -172,6 +171,11 @@ public class HttpHeaderUtil{
             logger.error("根据IP获取所在位置----------错误消息：[{}]" , e.getMessage());
         }
         return address==null?"获取地址失败":address;
+    }
+
+    public static void main(String[] args) {
+        String s = sendPost("", "UTF-8");
+        System.out.println(s);
     }
 
 }

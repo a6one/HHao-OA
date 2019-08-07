@@ -25,6 +25,7 @@ public class StringDateToDateConfig implements Converter<String, Date>{
         formarts.add("yyyy-MM-dd HH:mm:ss");
     }
 
+    //自适应的将字符串转换为date
     @Override
     public Date convert(String source)
     {

@@ -26,8 +26,7 @@ public class MyAttendCountThread implements Runnable{
 
 
     public MyAttendCountThread(WorkTimeMapper workTimeMapper, AttendMapper attendMapper,
-                               LeaveFormMapper leaveFormMapper, AttendCountMapper attendCountMapper, List<User> users)
-    {
+                               LeaveFormMapper leaveFormMapper, AttendCountMapper attendCountMapper, List<User> users) {
         this.workTimeMapper = workTimeMapper;
         this.leaveFormMapper = leaveFormMapper;
         this.attendMapper = attendMapper;
@@ -37,8 +36,7 @@ public class MyAttendCountThread implements Runnable{
 
 
     @Override
-    public void run()
-    {
+    public void run() {
 
         WorkTime workTime = workTimeMapper.selectUsing();
         //统计所有用户的

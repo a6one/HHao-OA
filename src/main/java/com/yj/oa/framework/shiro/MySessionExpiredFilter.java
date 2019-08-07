@@ -2,12 +2,8 @@ package com.yj.oa.framework.shiro;
 
 import com.yj.oa.common.utils.AjaxUtis;
 import com.yj.oa.common.utils.shiro.ShiroUtils;
-import com.yj.oa.framework.web.controller.BaseController;
-import com.yj.oa.framework.web.po.AjaxResult;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.PathMatchingFilter;
-import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
-import org.apache.shiro.web.servlet.AdviceFilter;
 import org.apache.shiro.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
@@ -23,17 +19,14 @@ import java.util.Map;
 public class MySessionExpiredFilter extends PathMatchingFilter{
 
     @Override
-    protected boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception
-    {
+    protected boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
         Subject subjct = ShiroUtils.getSubjct();
         HttpServletRequest reqs = WebUtils.toHttp(request);
         String url = reqs.getRequestURI();
         //是否ajax请求
-        if (AjaxUtis.isAjax(reqs))
-        {
+        if (AjaxUtis.isAjax(reqs)) {
             //是否认证登录了
-            if (!subjct.isAuthenticated())
-            {
+            if (!subjct.isAuthenticated()) {
                 //是否是登录请求
                 Map<String, String> map = new HashMap<>();
                 map.put("code", "1");

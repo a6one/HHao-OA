@@ -13,8 +13,7 @@ import javax.servlet.MultipartConfigElement;
 @Configuration
 public class MultipartConfig{
     @Bean
-    MultipartConfigElement multipartConfigElement()
-    {
+    MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
         //文件最大
         factory.setMaxFileSize("10MB");

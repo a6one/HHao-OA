@@ -75,8 +75,7 @@ public class ActApplyRoomFormServiceImpl implements IActApplyRoomFormService{
      * @param applyRoom:预约会议室信息 启动申请流程
      */
     @Override
-    public void apply(ApplyRoomForm applyRoom)
-    {
+    public void apply(ApplyRoomForm applyRoom) {
 
         //设置任务发起人 （通过此id获取发起人的流程实例记录,统计申请记录次数）
         String uId = applyRoom.getProposer_Id();
