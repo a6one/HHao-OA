@@ -35,7 +35,7 @@ public class FtpUtil{
      */
     private static final int port = 21;
     /**
-     * FTP登录账号
+     * FTP登录账号xxxx
      */
     private static final String username = "ftpuser";
     /**
